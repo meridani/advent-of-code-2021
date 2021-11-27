@@ -1,6 +1,14 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/meridani/advent-of-code-2021)](https://goreportcard.com/badge/github.com/meridani/advent-of-code-2021)
 # Advent of Code 2021 in Go
 
 ![AoC Logo](assets/AoC.png)
+
+## Running the days
+
+```sh
+    cd cmd/dayXX
+    go run .
+```
 
 ## Overview
 
