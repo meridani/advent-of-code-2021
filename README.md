@@ -3,6 +3,12 @@
 
 ![AoC Logo](assets/AoC.png)
 
+You need to get your Adven of code session.
+1. Login on the webpage
+2. F12 - Network - Headers
+3. copy the session=1234....ef into assets/.aocsession file without the session= part
+
+
 ## Running the days
 
 ```sh
