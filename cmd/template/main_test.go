@@ -35,10 +35,6 @@ func BenchmarkRun(b *testing.B) {
 	}
 }
 
-// func TestMainFunc(t *testing.T) {
-// 	main()
-// }
-
 func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
