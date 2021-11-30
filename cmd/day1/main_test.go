@@ -37,21 +37,13 @@ func PrepareTestData(t *testing.T) {
 			input: i,
 			want1: "",
 			want2: "",
-			err:   errors.New("there are less than 3 input numbers to compare"),
+			err:   errors.New("error returned mismatch"),
 		})
 	testDatas = append(testDatas,
 		testData{
-			name:  "example data 1",
+			name:  "Too much arguments",
 			input: pkg.Input(example),
-			want1: "514579",
-			want2: "",
-			err:   nil,
-		})
-	testDatas = append(testDatas,
-		testData{
-			name:  "example failure",
-			input: pkg.Input(example),
-			want1: "0",
+			want1: "",
 			want2: "",
 			err:   nil,
 		})
@@ -59,8 +51,8 @@ func PrepareTestData(t *testing.T) {
 		testData{
 			name:  "input file",
 			input: "input.txt",
-			want1: "1020084",
-			want2: "295086480",
+			want1: "0",
+			want2: "0",
 			err:   nil,
 		})
 }
