@@ -1,93 +1,32 @@
 package main
 
 import (
-	"errors"
-	"fmt"
 	"os"
 	"testing"
 
 	"github.com/meridani/advent-of-code-2021/pkg"
 )
 
-type testData struct {
-	name  string
-	input pkg.Input
-	want1 string
-	want2 string
-	err   error
-}
-
-var i pkg.Input = pkg.Input("")
-
-var example string = `1721
-979
-366
-299
-675
-1456`
-
-var testDatas = []testData{}
-
-func PrepareTestData(t *testing.T) {
-	t.Helper()
-	i.FromIntSlice([]int{1, 2})
-	testDatas = append(testDatas,
-		testData{
-			name:  "Too Few arguments",
-			input: i,
-			want1: "",
-			want2: "",
-			err:   errors.New("there are less than 3 input numbers to compare"),
-		})
-	testDatas = append(testDatas,
-		testData{
-			name:  "example data 1",
-			input: pkg.Input(example),
-			want1: "514579",
-			want2: "",
-			err:   nil,
-		})
-	testDatas = append(testDatas,
-		testData{
-			name:  "example failure",
-			input: pkg.Input(example),
-			want1: "0",
-			want2: "",
-			err:   nil,
-		})
-	testDatas = append(testDatas,
-		testData{
-			name:  "input file",
-			input: "input.txt",
-			want1: "1020084",
-			want2: "295086480",
-			err:   nil,
-		})
+var RunTests = []struct {
+	name         string
+	input        pkg.Input
+	want1, want2 int
+}{
+	{name: "No input", input: pkg.Input(""), want1: 0, want2: 0},
+	{name: "Example 1", input: *pkg.GetInputFromSlice([]int{1721, 979, 366, 299, 675, 1456}), want1: 514579, want2: 241861950},
 }
 
 func TestRun(t *testing.T) {
-	PrepareTestData(t)
-	for _, data := range testDatas {
-
-		if data.input == "input.txt" {
-			data.input, _ = pkg.ReadInput("input.txt")
+	for _, test := range RunTests {
+		got1, got2 := run(test.input)
+		if got1 != test.want1 {
+			t.Errorf("%v failed: got %v want %v", test.name, got1, test.want1)
 		}
-
-		p1, p2, err := run(data.input)
-		p1string := fmt.Sprintf("%v", p1)
-		p2string := fmt.Sprintf("%v", p2)
-
-		if data.want1 != "" && data.want1 != p1string {
-			t.Errorf("In test [%v] Part 1 got: %v, want %v", data.name, p1string, data.want1)
+		if got2 != test.want2 {
+			t.Errorf("%v failed: got %v want %v", test.name, got2, test.want2)
 		}
-		if data.want2 != "" && data.want2 != p2string {
-			t.Errorf("In test [%v] Part 2 got: %v, want %v", data.name, p2string, data.want2)
-		}
-		if data.err != nil && err != nil && data.err.Error() != err.Error() {
-			t.Errorf("In test [%v] Error test got: %v, want %v", data.name, err, data.err)
-		}
-		// t.Logf("Test [%v] passed", data.name)
 	}
+
 }
 
 func BenchmarkRun(b *testing.B) {

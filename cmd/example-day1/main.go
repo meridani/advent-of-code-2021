@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"log"
 
@@ -11,7 +10,7 @@ import (
 
 var DAY = 1
 
-func run(input pkg.Input) (interface{}, interface{}, error) {
+func run(input pkg.Input) (interface{}, interface{}) {
 
 	numbers := input.AsIntSlice()
 
@@ -20,9 +19,6 @@ func run(input pkg.Input) (interface{}, interface{}, error) {
 
 	part1NotFound, part2NotFound := true, true
 
-	if len(numbers) < 3 {
-		return 0, 0, errors.New("there are less than 3 input numbers to compare")
-	}
 	for i := 0; i < len(numbers)-2; i++ {
 		if !part1NotFound && !part2NotFound {
 			break
@@ -40,7 +36,7 @@ func run(input pkg.Input) (interface{}, interface{}, error) {
 			}
 		}
 	}
-	return part1, part2, nil
+	return part1, part2
 }
 
 func main() {

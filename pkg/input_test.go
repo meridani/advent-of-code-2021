@@ -15,11 +15,10 @@ var FromIntSliceTests = []struct {
 	{name: "Slice of 2", input: []int{1, 2}, want: Input("1\n2")},
 }
 
-func TestFromIntSlice(t *testing.T) {
+func TestGetInputFromSlice(t *testing.T) {
 
 	for _, test := range FromIntSliceTests {
-		got := Input("")
-		got.FromIntSlice(test.input)
+		got := *GetInputFromSlice(test.input)
 		if string(test.want) != string(got) {
 			t.Errorf("%v failed: got %v want %v", test.name, test.want, got)
 		}

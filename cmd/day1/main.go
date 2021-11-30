@@ -10,7 +10,7 @@ import (
 
 var DAY = 1
 
-func run(input pkg.Input) (interface{}, interface{}, error) {
+func run(input pkg.Input) (interface{}, interface{}) {
 
 	// numbers := input.AsIntSlice()
 	// lines := input.AsStringSlice()
@@ -18,7 +18,7 @@ func run(input pkg.Input) (interface{}, interface{}, error) {
 	part1 := 0
 	part2 := 0
 
-	return part1, part2, nil
+	return part1, part2
 }
 
 func main() {

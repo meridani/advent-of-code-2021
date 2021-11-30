@@ -12,12 +12,19 @@ import (
 // Input holds the puzzle inputs as a string
 type Input string
 
-// FromIntSlice creates an Input from a slice of ints
-func (i *Input) FromIntSlice(numbers []int) {
-	// fmt.Println(i)
-	*i = Input(strings.Trim(strings.Join(strings.Fields(fmt.Sprint(numbers)), "\n"), "[]"))
-	// fmt.Println(i)
+func GetInputFromSlice(numbers []int) *Input {
+	input := Input("")
+
+	input = Input(strings.Trim(strings.Join(strings.Fields(fmt.Sprint(numbers)), "\n"), "[]"))
+	return &input
 }
+
+// FromIntSlice creates an Input from a slice of ints
+// func (i *Input) FromIntSlice(numbers []int) {
+// 	// fmt.Println(i)
+// 	*i = Input(strings.Trim(strings.Join(strings.Fields(fmt.Sprint(numbers)), "\n"), "[]"))
+// 	// fmt.Println(i)
+// }
 
 // AsIntSlice returns the Input as a slice of ints
 func (i *Input) AsIntSlice() []int {
