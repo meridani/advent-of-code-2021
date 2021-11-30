@@ -46,4 +46,3 @@ You need to get your Advent of code session.
 | [22](https://adventofcode.com/2021/day/22) |      |       |
 | [23](https://adventofcode.com/2021/day/23) |      |       |
 | [24](https://adventofcode.com/2021/day/24) |      |       |
-| [25](https://adventofcode.com/2021/day/25) |      |       |

@@ -2,7 +2,6 @@ package pkg
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"strings"
@@ -10,33 +9,43 @@ import (
 	"github.com/cavaliercoder/grab"
 )
 
-var AOCSESSION = ""
-
+// Input holds the puzzle inputs as a string
 type Input string
 
-func (i *Input) FromIntSlice(numbers []int) Input {
-	fmt.Println(i)
+// FromIntSlice creates an Input from a slice of ints
+func (i *Input) FromIntSlice(numbers []int) {
+	// fmt.Println(i)
 	*i = Input(strings.Trim(strings.Join(strings.Fields(fmt.Sprint(numbers)), "\n"), "[]"))
-	fmt.Println(i)
-	return *i
+	// fmt.Println(i)
 }
 
+// AsIntSlice returns the Input as a slice of ints
 func (i *Input) AsIntSlice() []int {
+	if len(*i) == 0 {
+		return []int{}
+	}
 	numbers := i.AsStringSlice()
 	ints := make([]int, len(numbers))
 	for i, current := range numbers {
-		ints[i] = MustAtoi(current)
+		num, err := MustAtoi(current)
+		if err == nil {
+			ints[i] = num
+		}
 	}
 	return ints
 }
 
-func (i Input) AsStringSlice() []string {
-	return strings.Split(strings.Trim(string(i), "\n"), "\n")
+// AsStringSlice returns the Input as a slice of strings
+func (i *Input) AsStringSlice() []string {
+	if len(*i) == 0 {
+		return []string{}
+	}
+	return strings.Split(strings.Trim(string(*i), "\n"), "\n")
 }
 
 // ReadInput reads the input file into a string
 func ReadInput(fileName string) (puzzle Input, err error) {
-	content, err := ioutil.ReadFile(fileName)
+	content, err := os.ReadFile(fileName)
 	if err != nil {
 		return "", err
 	}
@@ -60,7 +69,7 @@ func CheckAndDownloadFile(filename, url string) {
 			log.Println("Can't read .aocsession file so no download for you!")
 			return
 		}
-		session, err := ioutil.ReadFile("../../assets/.aocsession")
+		session, err := os.ReadFile("../../assets/.aocsession")
 		if err != nil {
 			log.Println(err)
 		}
