@@ -12,11 +12,26 @@ var DAY = 1
 
 func run(input pkg.Input) (interface{}, interface{}) {
 
-	// numbers := input.AsIntSlice()
+	numbers := input.AsIntSlice()
 	// lines := input.AsStringSlice()
 
 	part1 := 0
 	part2 := 0
+
+	for i := 1; i < len(numbers); i++ {
+		if numbers[i] > numbers[i-1] {
+			part1++
+		}
+	}
+	sums := []int{}
+	for i := 0; i < len(numbers)-2; i++ {
+		sums = append(sums, (numbers[i] + numbers[i+1] + numbers[i+2]))
+	}
+	for i := 1; i < len(sums); i++ {
+		if sums[i] > sums[i-1] {
+			part2++
+		}
+	}
 
 	return part1, part2
 }
