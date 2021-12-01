@@ -23,12 +23,8 @@ func run(input pkg.Input) (interface{}, interface{}) {
 			part1++
 		}
 	}
-	sums := []int{}
-	for i := 0; i < len(numbers)-2; i++ {
-		sums = append(sums, (numbers[i] + numbers[i+1] + numbers[i+2]))
-	}
-	for i := 1; i < len(sums); i++ {
-		if sums[i] > sums[i-1] {
+	for i := 3; i < len(numbers); i++ {
+		if numbers[i]+numbers[i-1]+numbers[i-2] > numbers[i-1]+numbers[i-2]+numbers[i-3] {
 			part2++
 		}
 	}
