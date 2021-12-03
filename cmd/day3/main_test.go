@@ -13,8 +13,18 @@ var RunTests = []struct {
 	want1, want2 int
 }{
 	{name: "No input", input: pkg.Input(""), want1: 0, want2: 0},
-	{name: "Example 1", input: *pkg.GetInputFromSlice([]int{}), want1: 0, want2: 0},
-	{name: "Example 2", input: *pkg.GetInputFromSlice([]int{}), want1: 0, want2: 0},
+	{name: "Example 1", input: pkg.Input(`00100
+11110
+10110
+10111
+10101
+01111
+00111
+11100
+10000
+11001
+00010
+01010`), want1: 198, want2: 230},
 }
 
 func TestRun(t *testing.T) {
@@ -27,7 +37,6 @@ func TestRun(t *testing.T) {
 			t.Errorf("%v part 2 failed: got %v want %v", test.name, got2, test.want2)
 		}
 	}
-
 }
 
 func BenchmarkRun(b *testing.B) {
