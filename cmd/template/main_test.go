@@ -21,10 +21,10 @@ func TestRun(t *testing.T) {
 	for _, test := range RunTests {
 		got1, got2 := run(test.input)
 		if got1 != test.want1 {
-			t.Errorf("%v failed: got %v want %v", test.name, got1, test.want1)
+			t.Errorf("%v part 1 failed: got %v want %v", test.name, got1, test.want1)
 		}
 		if got2 != test.want2 {
-			t.Errorf("%v failed: got %v want %v", test.name, got2, test.want2)
+			t.Errorf("%v part 2 failed: got %v want %v", test.name, got2, test.want2)
 		}
 	}
 
