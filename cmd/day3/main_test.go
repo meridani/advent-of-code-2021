@@ -37,7 +37,6 @@ func TestRun(t *testing.T) {
 			t.Errorf("%v part 2 failed: got %v want %v", test.name, got2, test.want2)
 		}
 	}
-
 }
 
 func BenchmarkRun(b *testing.B) {
