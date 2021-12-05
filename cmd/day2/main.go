@@ -29,10 +29,7 @@ func run(input pkg.Input) (interface{}, interface{}) {
 
 	for _, line := range lines {
 		parts := strings.Split(strings.TrimSpace(line), " ")
-		value, err := pkg.MustAtoi(parts[1])
-		if err != nil {
-			return 0, 0
-		}
+		value := pkg.MustAtoi(parts[1])
 
 		switch parts[0] {
 		case "forward":
