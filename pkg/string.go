@@ -21,10 +21,7 @@ func ToIntSlice(s string, sep string) []int {
 	numbers := []int{}
 	split := strings.Split(s, sep)
 	for _, cur := range split {
-		num, err := MustAtoi(cur)
-		if err != nil {
-			fmt.Printf("invalid in toIntSlice")
-		}
+		num := MustAtoi(cur)
 		numbers = append(numbers, num)
 	}
 	return numbers
