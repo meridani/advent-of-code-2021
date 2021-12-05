@@ -34,10 +34,8 @@ func (i *Input) AsIntSlice() []int {
 	numbers := i.AsStringSlice()
 	ints := make([]int, len(numbers))
 	for i, current := range numbers {
-		num, err := MustAtoi(current)
-		if err == nil {
-			ints[i] = num
-		}
+		num := MustAtoi(current)
+		ints[i] = num
 	}
 	return ints
 }

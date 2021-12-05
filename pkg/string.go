@@ -1,17 +1,16 @@
 package pkg
 
 import (
-	"errors"
 	"strconv"
 )
 
-func MustAtoi(s string) (int, error) {
+func MustAtoi(s string) int {
 	if s == "" {
-		return 0, errors.New("s can't be empty")
+		return 0
 	}
 	n, err := strconv.Atoi(s)
 	if err != nil {
 		panic(err)
 	}
-	return n, nil
+	return n
 }
