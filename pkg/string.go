@@ -1,21 +1,20 @@
 package pkg
 
 import (
-	"errors"
 	"fmt"
 	"strconv"
 	"strings"
 )
 
-func MustAtoi(s string) (int, error) {
+func MustAtoi(s string) int {
 	if s == "" {
-		return 0, errors.New("s can't be empty")
+		return 0
 	}
 	n, err := strconv.Atoi(s)
 	if err != nil {
 		fmt.Print("Invalid MustAtoi input...")
 	}
-	return n, nil
+	return n
 }
 
 func ToIntSlice(s string, sep string) []int {
