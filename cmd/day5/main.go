@@ -79,13 +79,6 @@ func run(input pkg.Input) (interface{}, interface{}) {
 	oceanFloor = fillFloor(lines, true)
 	part2 = countDanger(oceanFloor, 1)
 
-	// vents := readLineofVents(lines)
-	// oceanFloor := createMap(vents, false)
-	// part1 = countDanger(oceanFloor, 1)
-	// oceanFloor = nil
-	// part2Floor := createMap(vents, true)
-	// part2 = countDanger(part2Floor, 1)
-
 	return part1, part2
 }
 
