@@ -27,7 +27,7 @@ You need to get your Advent of code session.
 | [03](https://adventofcode.com/2021/day/3)  | Binary Diagnostic    | ⭐⭐    |
 | [04](https://adventofcode.com/2021/day/4)  | Giant Squid          | ⭐⭐    |
 | [05](https://adventofcode.com/2021/day/5)  | Hydrothermal Venture | ⭐⭐    |
-| [06](https://adventofcode.com/2021/day/6)  |                      |       |
+| [06](https://adventofcode.com/2021/day/6)  | Lanternfish          | ⭐⭐    |
 | [07](https://adventofcode.com/2021/day/7)  |                      |       |
 | [08](https://adventofcode.com/2021/day/8)  |                      |       |
 | [09](https://adventofcode.com/2021/day/9)  |                      |       |
