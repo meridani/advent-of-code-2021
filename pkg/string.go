@@ -10,6 +10,7 @@ func MustAtoi(s string) int {
 	if s == "" {
 		return 0
 	}
+	s = strings.TrimSpace(s)
 	n, err := strconv.Atoi(s)
 	if err != nil {
 		fmt.Print("Invalid MustAtoi input...")
