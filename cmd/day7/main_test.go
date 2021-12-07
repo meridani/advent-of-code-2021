@@ -12,9 +12,7 @@ var RunTests = []struct {
 	input        pkg.Input
 	want1, want2 int
 }{
-	{name: "No input", input: pkg.Input(""), want1: 0, want2: 0},
-	{name: "Example 1", input: *pkg.GetInputFromSlice([]int{}), want1: 0, want2: 0},
-	{name: "Example 2", input: *pkg.GetInputFromSlice([]int{}), want1: 0, want2: 0},
+	{name: "Example 1", input: pkg.Input(`16,1,2,0,4,2,7,1,2,14`), want1: 37, want2: 168},
 }
 
 func TestRun(t *testing.T) {
