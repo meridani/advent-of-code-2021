@@ -13,12 +13,9 @@ import (
 var DAY = 7
 
 func factor(n int) int {
-	ret := 0
-	for i := 1; i <= n; i++ {
-		ret += i
-	}
-	return ret
+	return n * (1 + n) / 2
 }
+
 func calculateFuelUsage(pos *[]int, useFactor bool) int {
 
 	min := math.MaxInt
