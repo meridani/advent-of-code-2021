@@ -29,7 +29,7 @@ You need to get your Advent of code session.
 | [05](https://adventofcode.com/2021/day/5)  | Hydrothermal Venture    | ⭐⭐    |
 | [06](https://adventofcode.com/2021/day/6)  | Lanternfish             | ⭐⭐    |
 | [07](https://adventofcode.com/2021/day/7)  | The Treachery of Whales | ⭐⭐    |
-| [08](https://adventofcode.com/2021/day/8)  |                         |       |
+| [08](https://adventofcode.com/2021/day/8)  | Seven Segment Search    | ⭐⭐    |
 | [09](https://adventofcode.com/2021/day/9)  |                         |       |
 | [10](https://adventofcode.com/2021/day/10) |                         |       |
 | [11](https://adventofcode.com/2021/day/11) |                         |       |
