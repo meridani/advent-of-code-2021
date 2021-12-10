@@ -21,7 +21,7 @@ var RunTests = []struct {
 {<[[]]>}<{[{[{[]{()[[[]
 [<(<(<(<{}))><([]([]()
 <{([([[(<>()){}]>(<<{{
-<{([{{}}[<[[[<>{}]]]>[]]`), want1: 26397, want2: 0},
+<{([{{}}[<[[[<>{}]]]>[]]`), want1: 26397, want2: 288957},
 }
 
 func TestRun(t *testing.T) {
@@ -45,11 +45,14 @@ var checkLineTests = []struct {
 	{name: "error >", input: "{()()()>", want: 25137},
 	{name: "error }", input: "(((()))}", want: 1197},
 	{name: "error )", input: "<([]){()}[{}])", want: 3},
+	{name: "error )", input: "[({(<(())[]>[[{[]{<()<>>", want: 288957},
+	{name: "error )", input: "[(()[<>])]({[<{<<[]>>(", want: 5566},
+	{name: "error )", input: "(((({<>}<{<{<>}{[]{[]{}", want: 1480781},
 }
 
 func TestCheckLine(t *testing.T) {
 	for _, test := range checkLineTests {
-		got := checkLine(test.input)
+		got, _ := checkLine(test.input)
 		if got != test.want {
 			t.Errorf("%v part 1 failed: got %v want %v", test.name, got, test.want)
 		}
