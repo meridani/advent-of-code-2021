@@ -12,7 +12,16 @@ var RunTests = []struct {
 	input        pkg.Input
 	want1, want2 int
 }{
-	{name: "Example 1", input: pkg.Input(``), want1: 0, want2: 0},
+	{name: "Example 1", input: pkg.Input(`[({(<(())[]>[[{[]{<()<>>
+[(()[<>])]({[<{<<[]>>(
+{([(<{}[<>[]}>{[]{[(<()>
+(((({<>}<{<{<>}{[]{[]{}
+[[<[([]))<([[{}[[()]]]
+[{[{({}]{}}([{[{{{}}([]
+{<[[]]>}<{[{[{[]{()[[[]
+[<(<(<(<{}))><([]([]()
+<{([([[(<>()){}]>(<<{{
+<{([{{}}[<[[[<>{}]]]>[]]`), want1: 26397, want2: 0},
 }
 
 func TestRun(t *testing.T) {
@@ -25,7 +34,26 @@ func TestRun(t *testing.T) {
 			t.Errorf("%v part 2 failed: got %v want %v", test.name, got2, test.want2)
 		}
 	}
+}
 
+var checkLineTests = []struct {
+	name  string
+	input string
+	want  int
+}{
+	{name: "error ]", input: "(]", want: 57},
+	{name: "error >", input: "{()()()>", want: 25137},
+	{name: "error }", input: "(((()))}", want: 1197},
+	{name: "error )", input: "<([]){()}[{}])", want: 3},
+}
+
+func TestCheckLine(t *testing.T) {
+	for _, test := range checkLineTests {
+		got := checkLine(test.input)
+		if got != test.want {
+			t.Errorf("%v part 1 failed: got %v want %v", test.name, got, test.want)
+		}
+	}
 }
 
 func BenchmarkRun(b *testing.B) {
