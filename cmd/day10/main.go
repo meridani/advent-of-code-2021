@@ -33,24 +33,6 @@ func getOpeningPos(c rune) int {
 	return -1
 }
 
-func isClosing(c rune) bool {
-	for _, o := range closings {
-		if c == o {
-			return true
-		}
-	}
-	return false
-}
-
-func getClosingPos(c rune) int {
-	for i, o := range closings {
-		if c == o {
-			return i
-		}
-	}
-	return -1
-}
-
 func checkLine(line string) (int, bool) {
 
 	opens := []rune{}
