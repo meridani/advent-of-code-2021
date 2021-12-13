@@ -19,18 +19,19 @@ const (
 	DIGIT_069 = 6
 	DIGIT_235 = 5
 )
-const (
-	DIGIT_1_STRING = "cf"
-	DIGIT_2_STRING = "acdeg"
-	DIGIT_3_STRING = "acdfg"
-	DIGIT_4_STRING = "bcdf"
-	DIGIT_5_STRING = "abdfg"
-	DIGIT_6_STRING = "abdefg"
-	DIGIT_7_STRING = "acf"
-	DIGIT_8_STRING = "abcdefg"
-	DIGIT_9_STRING = "abcdfg"
-	DIGIT_0_STRING = "abcefg"
-)
+
+var digitStrings = map[string]int{
+	"cf":      1,
+	"acdeg":   2,
+	"acdfg":   3,
+	"bcdf":    4,
+	"abdfg":   5,
+	"abdefg":  6,
+	"acf":     7,
+	"abcdefg": 8,
+	"abcdfg":  9,
+	"abcefg":  0,
+}
 
 type decoder struct {
 	secret map[rune]string
@@ -110,7 +111,7 @@ func (d *decoder) removeDuplicates() {
 		// 		for j_k, j_v := range d.secret {
 		// 			if c_k != i_k && i_k != j_k && c_k != j_k &&
 		// 				c_v == i_v && i_v == j_v && c_v == j_v {
-		// 				if !contains(valuesToRemove, c_v) {
+		// 				if !pkg.SliceContainsString(valuesToRemove, c_v) {
 		// 					valuesToRemove = append(valuesToRemove, c_v)
 		// 				}
 		// 			}
@@ -132,7 +133,6 @@ func (d *decoder) removeDuplicates() {
 			}
 		}
 	}
-
 }
 
 func (d *decoder) getKeyFromValue(search string) rune {
@@ -179,67 +179,9 @@ func (d *decoder) checkKeys() bool {
 	return true
 }
 
-func decodeDigit(digit string) int {
-	digit = strings.TrimSpace(digit)
-	switch len(digit) {
-	case DIGIT_1:
-		return 1
-	case DIGIT_4:
-		return 4
-	case DIGIT_7:
-		return 7
-	case DIGIT_8:
-		return 8
-	default:
-		return -1
-	}
-}
-
-func decodeDigitFromSegments(segments string) string {
-	switch segments {
-	case DIGIT_0_STRING:
-		return "0"
-	case DIGIT_1_STRING:
-		return "1"
-	case DIGIT_2_STRING:
-		return "2"
-	case DIGIT_3_STRING:
-		return "3"
-	case DIGIT_4_STRING:
-		return "4"
-	case DIGIT_5_STRING:
-		return "5"
-	case DIGIT_6_STRING:
-		return "6"
-	case DIGIT_7_STRING:
-		return "7"
-	case DIGIT_8_STRING:
-		return "8"
-	case DIGIT_9_STRING:
-		return "9"
-	default:
-		return "0"
-	}
-}
-
-func part1(input []string) int {
+func solve(input []string) (int, int) {
 	sum := 0
-	for _, line := range input {
-		parts := strings.Split(line, "|")
-		if len(parts) == 2 {
-			digits := strings.Fields(parts[1])
-			for _, number := range digits {
-				if decodeDigit(number) > 0 {
-					sum++
-				}
-			}
-		}
-	}
-	return sum
-}
-
-func part2(input []string) int {
-	sum := 0
+	sumDigits := 0
 	for _, line := range input {
 		keyDecoder := decoder{}
 		parts := strings.Split(line, "|")
@@ -252,23 +194,25 @@ func part2(input []string) int {
 				}
 			}
 			output := strings.Fields(parts[1])
-			outputDigits := ""
+			var outputDigits strings.Builder
 			for _, number := range output {
-				digit := decodeDigitFromSegments(keyDecoder.decode(number))
-				outputDigits = outputDigits + digit
+				digit := digitStrings[keyDecoder.decode(number)]
+				outputDigits.WriteString(fmt.Sprint(digit))
+				if digit == 1 || digit == 4 || digit == 7 || digit == 8 {
+					sumDigits++
+				}
 			}
-			sum += pkg.MustAtoi(outputDigits)
+			sum += pkg.MustAtoi(outputDigits.String())
 		}
 	}
-	return sum
+	return sumDigits, sum
 }
 
 func run(input pkg.Input) (interface{}, interface{}) {
 
 	// numbers := input.AsIntSlice()
 	lines := input.AsStringSlice()
-	part1 := part1(lines)
-	part2 := part2(lines)
+	part1, part2 := solve(lines)
 
 	return part1, part2
 }
