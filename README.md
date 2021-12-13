@@ -30,9 +30,9 @@ You need to get your Advent of code session.
 | [06](https://adventofcode.com/2021/day/6)  | Lanternfish             | ⭐⭐    |
 | [07](https://adventofcode.com/2021/day/7)  | The Treachery of Whales | ⭐⭐    |
 | [08](https://adventofcode.com/2021/day/8)  | Seven Segment Search    | ⭐⭐    |
-| [09](https://adventofcode.com/2021/day/9)  |                         |       |
-| [10](https://adventofcode.com/2021/day/10) |                         |       |
-| [11](https://adventofcode.com/2021/day/11) |                         |       |
+| [09](https://adventofcode.com/2021/day/9)  | Smoke Basin             | ⭐⭐    |
+| [10](https://adventofcode.com/2021/day/10) | Syntax Scoring          | ⭐⭐    |
+| [11](https://adventofcode.com/2021/day/11) | Dumbo Octopus           | ⭐⭐    |
 | [12](https://adventofcode.com/2021/day/12) |                         |       |
 | [13](https://adventofcode.com/2021/day/13) |                         |       |
 | [14](https://adventofcode.com/2021/day/14) |                         |       |

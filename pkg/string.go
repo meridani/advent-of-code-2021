@@ -43,6 +43,14 @@ func ToIntSlice(s string, sep string) []int {
 	return numbers
 }
 
+func ToIntSliceCharacter(s string) []int {
+	ret := []int{}
+	for _, char := range s {
+		ret = append(ret, int(char-'0'))
+	}
+	return ret
+}
+
 type sortRunes []rune
 
 func (s sortRunes) Less(i, j int) bool {

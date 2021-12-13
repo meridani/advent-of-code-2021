@@ -41,3 +41,24 @@ func ChangeToFloatSlice(ar []int) []float64 {
 	}
 	return newar
 }
+
+func Contains(n int, s *[]int) bool {
+	for _, v := range *s {
+		if v == n {
+			return true
+		}
+	}
+	return false
+}
+
+func Equal(a *[]int, b *[]int) bool {
+	if len(*a) != len(*b) {
+		return false
+	}
+	for i := range *a {
+		if (*a)[i] != (*b)[i] {
+			return false
+		}
+	}
+	return true
+}
