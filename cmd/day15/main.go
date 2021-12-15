@@ -1,6 +1,7 @@
 package main
 
 import (
+	"container/heap"
 	"fmt"
 	"log"
 	"math"
@@ -14,71 +15,90 @@ var DAY = 15
 type point struct {
 	x, y int
 }
-
-var directions = []point{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}
-
-func lowestPath(cave [][]int) int {
-	queue := [][]point{}
-	shortest := math.MaxInt
-
-	queue = append(queue, []point{{0, 1}})
-	queue = append(queue, []point{{1, 0}})
-	maxX := len(cave[0])
-	maxY := len(cave)
-
-	for len(queue) > 0 {
-
-		current := queue[0]
-		queue = queue[1:]
-		newQueue := make([][]point, 0, len(queue)+4)
-		last := current[len(current)-1]
-
-		for _, p := range directions {
-			np := point{last.x + p.x, last.y + p.y}
-			if np.x == maxX-1 && np.y == maxY-1 {
-				current = append(current, np)
-				len := pathLength(current, cave)
-				if len < shortest {
-					shortest = len
-				}
-				break
-			}
-			if np.x == 0 && np.y == 0 {
-				continue
-			}
-
-			if np.x < 0 || np.y < 0 || np.x >= maxX || np.y >= maxY {
-				continue
-			}
-
-			if !contains(np, current) {
-				newCurrent := make([]point, len(current), len(current)+1)
-				copy(newCurrent, current)
-				newCurrent = append(newCurrent, np)
-				newQueue = append(newQueue, newCurrent)
-			}
-		}
-		newQueue = append(newQueue, queue...)
-		queue = newQueue
-	}
-	return shortest
+type node struct {
+	p   point
+	val int
 }
 
-func pathLength(p []point, cave [][]int) int {
-	sum := 0
-	for _, v := range p {
-		sum += cave[v.y][v.x]
-	}
-	return sum
+type pQueue []node
+
+func (pq pQueue) Len() int { return len(pq) }
+
+func (pq pQueue) Less(i, j int) bool {
+	return pq[i].val < pq[j].val
 }
 
-func contains(p point, c []point) bool {
-	for _, v := range c {
-		if p.x == v.x && p.y == v.y {
-			return true
+func (pq pQueue) Swap(i, j int) {
+	pq[i], pq[j] = pq[j], pq[i]
+}
+
+func (pq *pQueue) Push(x interface{}) {
+	*pq = append(*pq, x.(node))
+}
+
+func (pq *pQueue) Pop() interface{} {
+	n := len(*pq)
+	item := (*pq)[n-1]
+	*pq = (*pq)[0 : n-1]
+	return item
+}
+
+func lowestPath(cave *[][]int) int {
+
+	maxX := len((*cave)[0])
+	maxY := len((*cave))
+	dist := make([][]int, 0, maxY)
+	seen := make([][]bool, 0, maxY)
+
+	for i := 0; i < maxY; i++ {
+		cd := make([]int, 0, maxX)
+		cs := make([]bool, 0, maxX)
+		for j := 0; j < maxX; j++ {
+			cd = append(cd, math.MaxInt)
+			cs = append(cs, false)
+		}
+		dist = append(dist, cd)
+		seen = append(seen, cs)
+	}
+
+	h := make(pQueue, 1, 100)
+	h[0] = node{point{0, 0}, 0}
+
+	for {
+		cur := heap.Pop(&h).(node)
+		seen[cur.p.y][cur.p.x] = true
+		if cur.p.x == maxX-1 && cur.p.y == maxY-1 {
+			return cur.val
+		}
+
+		for _, near := range [][2]int{
+			{cur.p.x + 1, cur.p.y}, {cur.p.x - 1, cur.p.y},
+			{cur.p.x, cur.p.y + 1}, {cur.p.x, cur.p.y - 1}} {
+			if !(near[0] >= 0 && near[0] < maxX && near[1] >= 0 && near[1] < maxY) ||
+				seen[near[1]][near[0]] {
+				continue
+			}
+			val := cur.val + (*cave)[near[1]][near[0]]
+			if val >= dist[near[1]][near[0]] {
+				continue
+			}
+			dist[near[1]][near[0]] = val
+			heap.Push(&h, node{point{near[0], near[1]}, val})
 		}
 	}
-	return false
+}
+
+func increase(line *[]int, n int) *[]int {
+
+	new := []int{}
+
+	for _, v := range *line {
+		new = append(new, v+n)
+		if new[len(new)-1] > 9 {
+			new[len(new)-1] %= 9
+		}
+	}
+	return &new
 }
 
 func run(input pkg.Input) (interface{}, interface{}) {
@@ -92,7 +112,25 @@ func run(input pkg.Input) (interface{}, interface{}) {
 	for _, line := range lines {
 		cave = append(cave, pkg.ToIntSliceCharacter(line))
 	}
-	part1 = lowestPath(cave)
+	newCave := make([][]int, 0, len(cave)*5)
+
+	for _, row := range cave {
+		newLine := []int{}
+		for i := 0; i < 5; i++ {
+			newLine = append(newLine, *increase(&row, i)...)
+		}
+		newCave = append(newCave, newLine)
+	}
+	newnewCave := make([][]int, 0, len(cave)*5)
+	for j := 0; j < 5; j++ {
+		for _, row := range newCave {
+			inc := increase(&row, j)
+			newnewCave = append(newnewCave, *inc)
+		}
+	}
+
+	part1 = lowestPath(&cave)
+	part2 = lowestPath(&newnewCave)
 
 	return part1, part2
 }

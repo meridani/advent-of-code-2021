@@ -36,7 +36,7 @@ You need to get your Advent of code session.
 | [12](https://adventofcode.com/2021/day/12) | Passage Pathing         | ⭐⭐    |
 | [13](https://adventofcode.com/2021/day/13) | Transparent Origami     | ⭐⭐    |
 | [14](https://adventofcode.com/2021/day/14) | Extended Polymerization | ⭐⭐    |
-| [15](https://adventofcode.com/2021/day/15) |                         |       |
+| [15](https://adventofcode.com/2021/day/15) | Chiton                  | ⭐⭐    |
 | [16](https://adventofcode.com/2021/day/16) |                         |       |
 | [17](https://adventofcode.com/2021/day/17) |                         |       |
 | [18](https://adventofcode.com/2021/day/18) |                         |       |
