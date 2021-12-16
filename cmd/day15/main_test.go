@@ -12,6 +12,22 @@ var RunTests = []struct {
 	input        pkg.Input
 	want1, want2 int
 }{
+	{"all 1", pkg.Input(`111
+111
+111`), 4, 136},
+	{"smol", pkg.Input(`123
+456
+789`), 20, 97},
+	{"bigur", pkg.Input(`1111
+2221
+2221
+2221`), 6, 153},
+	{"more bigur", pkg.Input(`19111
+19191
+19191
+19191
+11191`), 16, 212},
+
 	{name: "Example 1", input: pkg.Input(`1163751742
 1381373672
 2136511328
@@ -21,7 +37,7 @@ var RunTests = []struct {
 1359912421
 3125421639
 1293138521
-2311944581`), want1: 40, want2: 0},
+2311944581`), want1: 40, want2: 315},
 }
 
 func TestRun(t *testing.T) {
