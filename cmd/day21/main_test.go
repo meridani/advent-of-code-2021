@@ -27,6 +27,17 @@ func TestRun(t *testing.T) {
 	}
 }
 
+func TestPlayWithDeterministicDice(t *testing.T) {
+	p1 := player{1, 4, 0}
+	p2 := player{2, 8, 0}
+	players := []player{p1, p2}
+	want := 739785
+	got := playWithDeterministicDice(players)
+	if got != want {
+		t.Errorf("Deterministic dice was faulty got: %v, want: %v", got, want)
+	}
+}
+
 func BenchmarkRun(b *testing.B) {
 	input, _ := pkg.ReadInput("input.txt")
 	for n := 0; n < b.N; n++ {
